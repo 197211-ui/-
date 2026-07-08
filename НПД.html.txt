@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Договор с самозанятым · безопасные формулировки</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+        body {
+            background: #f0f3f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+        .card {
+            max-width: 1300px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 40px;
+            box-shadow: 0 30px 60px -20px rgba(0, 20, 40, 0.2);
+            padding: 36px 40px;
+            transition: 0.2s;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e7edf5;
+            padding-bottom: 18px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .card-header h1 {
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            color: #0b1a2b;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .card-header h1 small {
+            font-weight: 400;
+            font-size: 16px;
+            color: #4d6a8c;
+            letter-spacing: 0.2px;
+        }
+        .badge {
+            background: #e7effa;
+            color: #1d4a7a;
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1.8fr;
+            gap: 24px 36px;
+        }
+        .clause-label {
+            font-weight: 600;
+            font-size: 19px;
+            color: #182b44;
+            padding-top: 6px;
+            border-right: 2px dashed #d5dfec;
+            padding-right: 24px;
+            text-align: right;
+            align-self: start;
+            line-height: 1.4;
+        }
+        .clause-label small {
+            display: block;
+            font-weight: 400;
+            font-size: 14px;
+            color: #5b738f;
+            margin-top: 4px;
+        }
+        .clause-content {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .select-block {
+            background: #f9fcff;
+            border-radius: 20px;
+            padding: 16px 20px;
+            border: 1px solid #e3ebf5;
+            transition: 0.1s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .select-block .q {
+            font-size: 15px;
+            font-weight: 500;
+            color: #1c3552;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .select-block .q .num {
+            background: #e9f0f8;
+            padding: 0 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #2a4b72;
+        }
+        .select-block select {
+            padding: 10px 14px;
+            border-radius: 14px;
+            border: 1px solid #cbd8e9;
+            background: white;
+            font-size: 15px;
+            color: #0d2139;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.1s;
+            outline: none;
+        }
+        .select-block select:focus {
+            border-color: #2d6fb0;
+            box-shadow: 0 0 0 3px rgba(45, 111, 176, 0.15);
+        }
+        .select-block select.correct {
+            border-color: #1c8b5a;
+            background: #e6f5ed;
+        }
+        .select-block select.wrong {
+            border-color: #b13e3a;
+            background: #fdeeec;
+        }
+        .select-block .hint-text {
+            font-size: 13px;
+            color: #4b688b;
+            padding-left: 4px;
+            margin-top: 2px;
+            opacity: 0.9;
+        }
+        .select-block .hint-text strong {
+            color: #0b2b4b;
+        }
+        .btn-check {
+            background: #1a4f7a;
+            color: white;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 60px;
+            font-size: 17px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.15s;
+            margin-top: 28px;
+            letter-spacing: 0.3px;
+            align-self: flex-start;
+        }
+        .btn-check:hover {
+            background: #0e3c60;
+            transform: scale(1.01);
+        }
+        .btn-check:disabled {
+            opacity: 0.5;
+            pointer-events: none;
+            filter: grayscale(0.3);
+        }
+        .result-area {
+            margin-top: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px 30px;
+            padding: 16px 20px;
+            background: #f2f7fe;
+            border-radius: 30px;
+            border: 1px solid #dae5f2;
+        }
+        .result-area .score {
+            font-weight: 600;
+            font-size: 18px;
+            color: #0f2a47;
+        }
+        .result-area .message {
+            font-size: 15px;
+            color: #1b3a5c;
+        }
+        .result-area .message .green {
+            color: #0f7a4b;
+            font-weight: 500;
+        }
+        .result-area .message .red {
+            color: #b13e3a;
+            font-weight: 500;
+        }
+        .footer-note {
+            margin-top: 28px;
+            border-top: 1px solid #e3ebf5;
+            padding-top: 18px;
+            display: flex;
+            justify-content: flex-end;
+            font-size: 14px;
+            color: #3b5c7c;
+        }
+        @media (max-width: 850px) {
+            .card { padding: 24px 18px; }
+            .grid { grid-template-columns: 1fr; gap: 8px; }
+            .clause-label {
+                border-right: none;
+                border-bottom: 2px dashed #d5dfec;
+                padding-right: 0;
+                padding-bottom: 6px;
+                text-align: left;
+                margin-top: 16px;
+            }
+            .clause-label:first-of-type { margin-top: 0; }
+            .card-header { flex-direction: column; align-items: flex-start; }
+            .btn-check { width: 100%; justify-content: center; }
+        }
+        @media (max-width: 480px) {
+            .select-block { padding: 14px; }
+            .card-header h1 { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="contractCard">
+        <div class="card-header">
+            <h1>
+                📄 Договор подряда
+                <small>выберите безопасные формулировки</small>
+            </h1>
+            <span class="badge">самозанятость · НПД</span>
+        </div>
+
+        <div class="grid" id="clausesGrid">
+            <!-- ========== 1. Предмет договора ========= -->
+            <div class="clause-label">
+                Предмет договора
+                <small>объём работ</small>
+            </div>
+            <div class="clause-content">
+                <div class="select-block" data-id="q1">
+                    <div class="q">
+                        <span>Как сформулировать предмет?</span>
+                        <span class="num">1</span>
+                    </div>
+                    <select id="sel1">
+                        <option value="">— выберите —</option>
+                        <option value="A">Подрядчик обязуется выполнять работы по ремонту и обслуживанию компьютеров, принтеров и другой офисной техники Заказчика.</option>
+                        <option value="B">Подрядчик обязуется выполнить работы по ремонту 5 принтеров, характеристики которых указаны в Приложении № 1 к Договору.</option>
+                    </select>
+                    <div class="hint-text">Выберите один вариант</div>
+                </div>
+            </div>
+
+            <!-- ========== 2. Вознаграждение ========= -->
+            <div class="clause-label">
+                Вознаграждение
+                <small>размер оплаты</small>
+            </div>
+            <div class="clause-content">
+                <div class="select-block" data-id="q2">
+                    <div class="q">
+                        <span>Какая цена безопаснее?</span>
+                        <span class="num">2</span>
+                    </div>
+                    <select id="sel2">
+                        <option value="">— выберите —</option>
+                        <option value="A">Цена работ составляет 15 тыс. руб.</option>
+                        <option value="B">Цена работ — 50 тыс. руб. в месяц.</option>
+                    </select>
+                    <div class="hint-text">Выберите один вариант</div>
+                </div>
+            </div>
+
+            <!-- ========== 3. Оплата ========= -->
+            <div class="clause-label">
+                Оплата
+                <small>сроки платежей</small>
+            </div>
+            <div class="clause-content">
+                <div class="select-block" data-id="q3">
+                    <div class="q">
+                        <span>Как прописать оплату?</span>
+                        <span class="num">3</span>
+                    </div>
+                    <select id="sel3">
+                        <option value="">— выберите —</option>
+                        <option value="A">Заказчик перечисляет оплату ежемесячно не позднее 5-го и 25-го числа.</option>
+                        <option value="B">Заказчик перечисляет оплату в течение 5 календарных дней с момента подписания акта приёмки-сдачи.</option>
+                    </select>
+                    <div class="hint-text">Выберите один вариант</div>
+                </div>
+            </div>
+
+            <!-- ========== 4. Чек ========= -->
+            <div class="clause-label">
+                Чек
+                <small>фискальный документ</small>
+            </div>
+            <div class="clause-content">
+                <div class="select-block" data-id="q4">
+                    <div class="q">
+                        <span>Обязанность выдать чек</span>
+                        <span class="num">4</span>
+                    </div>
+                    <select id="sel4">
+                        <option value="">— выберите —</option>
+                        <option value="A">При безналичной оплате Подрядчик обязан выдать чек не позднее дня, следующего за днём получения вознаграждения.</option>
+                        <option value="B">Подрядчик обязан выдавать чек в сроки, установленные законодательством.</option>
+                    </select>
+                    <div class="hint-text">Выберите один вариант</div>
+                </div>
+            </div>
+
+            <!-- ========== 5. Режим работы / материалы ========= -->
+            <div class="clause-label">
+                Условия работы
+                <small>материалы и режим</small>
+            </div>
+            <div class="clause-content">
+                <div class="select-block" data-id="q5">
+                    <div class="q">
+                        <span>Что безопаснее включить в договор?</span>
+                        <span class="num">5</span>
+                    </div>
+                    <select id="sel5">
+                        <option value="">— выберите —</option>
+                        <option value="A">Подрядчик выполняет работы с 9:00 до 18:00. Заказчик обеспечивает запчастями.</option>
+                        <option value="B">Материалы предоставляет Подрядчик. Подрядчик самостоятельно определяет способы выполнения работ.</option>
+                    </select>
+                    <div class="hint-text">Выберите один вариант</div>
+                </div>
+            </div>
+
+            <!-- ========== 6. Долгосрочный характер ========= -->
+            <div class="clause-label">
+                Характер работ
+                <small>разово или постоянно</small>
+            </div>
+            <div class="clause-content">
+                <div class="select-block" data-id="q6">
+                    <div class="q">
+                        <span>Какой подход безопаснее?</span>
+                        <span class="num">6</span>
+                    </div>
+                    <select id="sel6">
+                        <option value="">— выберите —</option>
+                        <option value="A">Подрядчик выполняет разовую работу конкретного содержания. Если договор долгосрочный, то объём работ не должен быть одинаковым каждый месяц.</option>
+                        <option value="B">Подрядчик выполняет каждый месяц одинаковый объём работ по обслуживанию техники.</option>
+                    </select>
+                    <div class="hint-text">Выберите один вариант</div>
+                </div>
+            </div>
+
+            <!-- ========== 7. Акт ========= -->
+            <div class="clause-label">
+                Акт приёмки
+                <small>подтверждение выполнения</small>
+            </div>
+            <div class="clause-content">
+                <div class="select-block" data-id="q7">
+                    <div class="q">
+                        <span>Что важно прописать про акт?</span>
+                        <span class="num">7</span>
+                    </div>
+                    <select id="sel7">
+                        <option value="">— выберите —</option>
+                        <option value="A">Включить обязанность подписать акт, в котором перечислены конкретные услуги и работы.</option>
+                        <option value="B">Достаточно устного согласования, акт не обязателен.</option>
+                    </select>
+                    <div class="hint-text">Выберите один вариант</div>
+                </div>
+            </div>
+
+            <!-- ========== 8. НПД ========= -->
+            <div class="clause-label">
+                Налог (НПД)
+                <small>статус самозанятого</small>
+            </div>
+            <div class="clause-content">
+                <div class="select-block" data-id="q8">
+                    <div class="q">
+                        <span>Как защитить компанию?</span>
+                        <span class="num">8</span>
+                    </div>
+                    <select id="sel8">
+                        <option value="">— выберите —</option>
+                        <option value="A">Указать, что исполнитель платит НПД, и включить обязанность сообщить об утрате права на НПД.</option>
+                        <option value="B">Не упоминать налоги, это личное дело самозанятого.</option>
+                    </select>
+                    <div class="hint-text">Выберите один вариант</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- кнопка проверки -->
+        <button class="btn-check" id="checkBtn">Проверить все ответы</button>
+
+        <!-- область результата -->
+        <div class="result-area" id="resultArea">
+            <span class="score" id="scoreDisplay">0 / 8</span>
+            <span class="message" id="messageDisplay">Выберите варианты и нажмите «Проверить»</span>
+        </div>
+
+        <div class="footer-note">
+            <span>Выберите формулировку для каждого пункта</span>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Правильные ответы (значения option)
+            const correctMap = {
+                q1: 'B',   // предмет: конкретный перечень (5 принтеров + приложение)
+                q2: 'A',   // 15 тыс. (разовая сумма, не ежемесячный оклад)
+                q3: 'B',   // оплата после акта
+                q4: 'A',   // чек не позднее следующего дня
+                q5: 'B',   // материалы и способы – подрядчик, без режима работы
+                q6: 'A',   // разовая работа или неодинаковый объём
+                q7: 'A',   // акт с конкретными работами
+                q8: 'A'    // НПД + обязанность сообщить об утрате права
+            };
+
+            const selectors = {
+                q1: document.getElementById('sel1'),
+                q2: document.getElementById('sel2'),
+                q3: document.getElementById('sel3'),
+                q4: document.getElementById('sel4'),
+                q5: document.getElementById('sel5'),
+                q6: document.getElementById('sel6'),
+                q7: document.getElementById('sel7'),
+                q8: document.getElementById('sel8')
+            };
+
+            const checkBtn = document.getElementById('checkBtn');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const messageDisplay = document.getElementById('messageDisplay');
+
+            // вспомогательная функция для сброса стилей
+            function resetStyles() {
+                for (let key in selectors) {
+                    const sel = selectors[key];
+                    sel.classList.remove('correct', 'wrong');
+                }
+            }
+
+            // проверка
+            function checkAll() {
+                resetStyles();
+                let correctCount = 0;
+                let allSelected = true;
+
+                for (let key in correctMap) {
+                    const sel = selectors[key];
+                    const selected = sel.value;
+                    if (selected === '') {
+                        allSelected = false;
+                        continue;
+                    }
+                    const isCorrect = (selected === correctMap[key]);
+                    if (isCorrect) {
+                        sel.classList.add('correct');
+                        correctCount++;
+                    } else {
+                        sel.classList.add('wrong');
+                    }
+                }
+
+                // обновляем счёт
+                scoreDisplay.textContent = `${correctCount} / 8`;
+
+                // сообщение
+                if (!allSelected) {
+                    messageDisplay.innerHTML = '⚠️ Некоторые пункты не выбраны. Выберите все варианты.';
+                    return;
+                }
+
+                if (correctCount === 8) {
+                    messageDisplay.innerHTML = '✅ <span class="green">Отлично!</span> Все формулировки выбраны верно.';
+                } else {
+                    const wrong = 8 - correctCount;
+                    messageDisplay.innerHTML = `❌ <span class="red">${wrong} ошибок</span>. Отметьте красные поля и выберите безопасные варианты.`;
+                }
+            }
+
+            // событие на кнопку
+            checkBtn.addEventListener('click', checkAll);
+
+            // также можно сделать автоматическую проверку, но по заданию — только по кнопке.
+            // дополнительно: при изменении селекта можно убирать подсветку, чтобы не сбивало.
+            for (let key in selectors) {
+                selectors[key].addEventListener('change', function() {
+                    this.classList.remove('correct', 'wrong');
+                    // обновим счёт, но только если все выбраны — по желанию, но оставим только по кнопке
+                });
+            }
+
+            // инициализация: сообщение
+            messageDisplay.innerHTML = 'Выберите варианты и нажмите «Проверить»';
+            scoreDisplay.textContent = '0 / 8';
+        })();
+    </script>
+</body>
+</html>
